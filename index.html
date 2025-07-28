@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="in">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>ZizSongs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F0F3F8" />
+    <meta name="google-site-verification" content="DLBxg9MH2_pEa7wuMdTIwxzVed32QEzo9NyANSisgAA" />
+
+    <meta name="description" content="ZizSongs adalah situs musik gratis. Dengarkan lagu-lagu pilihan hanya di zizsongs.blogspot.com" />
+    <meta name="keywords" content="zizsong, zizsongs, zizaong, ziz, free music, musik gratis, lagu gratis, download lagu, musik download, free songs, blog musik, ziz songs blogspot com" />
+
+    <meta property="og:title" content="ZizSongs | Free Music For You" />
+    <meta property="og:description" content="ZizSongs adalah situs musik gratis. Dengarkan lagu-lagu pilihan hanya di zizsongs.blogspot.com" />
+    <meta property="og:url" content="https://zizsongs.blogspot.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ZizSongs" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/RFKcxf2t/20250701-141247.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.postimg.cc/bwwHSZ2X/20250701-141240.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.postimg.cc/PJH1XJkR/20250701-141252.png" />
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "ZizSongs",
+            "url": "https://zizsongs.blogspot.com",
+            "description": "ZizSongs adalah situs musik gratis. Dengarkan lagu-lagu pilihan hanya di zizsongs.blogspot.com"
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            -webkit-tap-highlight-color: rgba(100, 100, 100, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        h1 {
+            font-size: 33px;
+            margin-left: 30px;
+            margin-top: 35px;
+            margin-bottom: 0px;
+            font-weight: bold;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-top: 0px;
+            margin-left: 30px;
+            font-weight: normal;
+        }
+
+        /* --- Daftar Lagu --- */
+        .song-list {
+            margin-top: 15px;
+            padding-bottom: 30px;
+        }
+
+        .song-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 12px 30px;
+            cursor: pointer;
+        }
+
+        .thumb {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            padding: 0 0px;
+        }
+
+        .title {
+            font-size: 16px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .artist {
+            font-size: 14px;
+            color: #555;
+            margin-top: 0px;
+            font-weight: normal;
+        }
+
+        .duration {
+            font-size: 14px;
+            color: #444;
+            align-self: center;
+            text-align: right;
+            padding-left: 10px;
+        }
+
+        /* --- Floating Player --- */
+        .floating-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(15px);
+            background-color: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid #ddd;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .player-info .thumb {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-left: 30px;
+        }
+
+        .details .title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .details .artist {
+            font-size: 14px;
+            color: #555;
+            margin-top: 0px;
+            font-weight: normal;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 0 50px;
+        }
+
+        .control-icon {
+            width: 43px;
+            height: 43px;
+            cursor: pointer;
+        }
+
+        #shuffleBtn {
+            width: 27px;
+            height: 27px;
+            cursor: pointer;
+            margin-right: 27px;
+        }
+
+        #toggleButton {
+            width: 58px;
+            height: 58px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Songs for you</h1>
+        <h3>Listen to your favorite<br />songs here!</h3>
+    </header>
+
+    <main style="margin-bottom: 200px;" class="song-list" id="songList"></main>
+
+    <div class="floating-player">
+        <div style="margin-top: 10px; display: flex; justify-content: flex-end; align-items: center;">
+            <span class="duration" style="margin-right: 10px;" id="nowDuration">00:00</span>
+            <img id="shuffleBtn" class="control-icoon" src="https://i.imghippo.com/files/Ea8501kiA.png" />
+        </div>
+
+        <div class="player-info">
+            <img id="nowThumb" class="thumb" src="" alt="thumb" />
+            <div class="details">
+                <div id="nowTitle" class="title">Judul Lagu</div>
+                <div id="nowArtist" class="artist">Artis</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <img id="prevBtn" class="control-icon" src="https://i.imghippo.com/files/Wbru9167qLs.png" />
+            <img id="toggleButton" class="control-icon" src="https://i.imghippo.com/files/BJO6815Ko.png" />
+            <img id="nextBtn" class="control-icon" src="https://i.imghippo.com/files/Gf2373akE.png" />
+            <img style="display: none;" id="settingsBtn" class="control-icon" src="https://i.imghippo.com/files/YG4971N.png" />
+        </div>
+
+        <audio id="audioPlayer" hidden></audio>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+    <script>
+        // Firebase init
+        const firebaseConfig = {
+            apiKey: "AIzaSyByVGU2R4NB6N7FiBy4FocXgxCPygpEX5c",
+            authDomain: "catstore-93c1c.firebaseapp.com",
+            databaseURL: "https://catstore-93c1c-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "catstore-93c1c",
+            storageBucket: "catstore-93c1c.appspot.com",
+            messagingSenderId: "1023436390032",
+            appId: "1:1023436390032:web:d1f7fc95063228d3232215",
+            measurementId: "G-SR3T84KBXC"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Get Elements
+        const audio = document.getElementById("audioPlayer");
+        const nowTitle = document.getElementById("nowTitle");
+        const nowArtist = document.getElementById("nowArtist");
+        const nowThumb = document.getElementById("nowThumb");
+        const nowDuration = document.getElementById("nowDuration");
+        const playBtn = document.getElementById("toggleButton");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const shuffleBtn = document.getElementById("shuffleBtn");
+        const songList = document.getElementById("songList");
+        const settingsBtn = document.getElementById("settingsBtn");
+
+        let songs = [];
+        let currentIndex = -1;
+        let countdownInterval = null;
+
+        // Fetch songs and render list
+        db.ref("icikiwir/songs").on("value", (snapshot) => {
+            songs = [];
+            songList.innerHTML = "";
+            const temp = [];
+
+            snapshot.forEach((child) => {
+                const song = child.val();
+                song._key = child.key;
+                if (song.type === "mp3") {
+                    temp.push(song);
+                }
+            });
+
+            temp.sort((a, b) => b._key.localeCompare(a._key));
+            songs = temp;
+
+            songs.forEach((data, i) => {
+                const item = document.createElement("div");
+                item.className = "song-item";
+
+                const thumb = document.createElement("img");
+                thumb.src = data.thumb;
+                thumb.className = "thumb";
+
+                const info = document.createElement("div");
+                info.className = "info";
+
+                const title = document.createElement("h2");
+                title.textContent = data.name;
+                title.className = "title";
+
+                const artist = document.createElement("p");
+                artist.textContent = data.artist;
+                artist.className = "artist";
+
+                const duration = document.createElement("div");
+                duration.className = "duration";
+                duration.textContent = data.duration;
+
+                info.appendChild(title);
+                info.appendChild(artist);
+                item.appendChild(thumb);
+                item.appendChild(info);
+                item.appendChild(duration);
+
+                item.addEventListener("click", () => {
+                    currentIndex = i;
+                    playSong();
+                });
+
+                songList.appendChild(item);
+            });
+        });
+
+
+        function playSong() {
+            if (currentIndex < 0) return;
+            const song = songs[currentIndex];
+            audio.src = song.link;
+            audio.play();
+            nowTitle.textContent = song.name;
+            nowArtist.textContent = song.artist;
+            nowThumb.src = song.thumb;
+            playBtn.src = "https://i.imghippo.com/files/wha9389M.png";
+            updateMediaSession(song);
+            startCountdown();
+        }
+
+        function updateMediaSession(song) {
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: song.name,
+                    artist: song.artist,
+                    album: "ZizSongs",
+                    artwork: [{
+                        src: song.thumb,
+                        sizes: "512x512",
+                        type: "image/jpeg"
+                    }]
+                });
+
+                navigator.mediaSession.setActionHandler("play", () => {
+                    audio.play();
+                    playBtn.src = "https://i.imghippo.com/files/wha9389M.png";
+                });
+
+                navigator.mediaSession.setActionHandler("pause", () => {
+                    audio.pause();
+                    playBtn.src = "https://i.imghippo.com/files/BJO6815Ko.png";
+                });
+
+                navigator.mediaSession.setActionHandler("previoustrack", playPrev);
+                navigator.mediaSession.setActionHandler("nexttrack", playNext);
+
+                navigator.mediaSession.setActionHandler("seekbackward", () => {
+                    audio.currentTime -= 10;
+                });
+
+                navigator.mediaSession.setActionHandler("seekforward", () => {
+                    audio.currentTime += 10;
+                });
+            }
+        }
+
+        playBtn.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.src = "https://i.imghippo.com/files/wha9389M.png";
+                startCountdown();
+            } else {
+                audio.pause();
+                playBtn.src = "https://i.imghippo.com/files/BJO6815Ko.png";
+                clearInterval(countdownInterval);
+            }
+        });
+
+        function playNext() {
+            if (songs.length === 0) return;
+            currentIndex = (currentIndex + 1) % songs.length;
+            playSong();
+        }
+
+        function playPrev() {
+            if (songs.length === 0) return;
+            currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+            playSong();
+        }
+
+        shuffleBtn.addEventListener("click", () => {
+            if (songs.length > 0) {
+                currentIndex = Math.floor(Math.random() * songs.length);
+                playSong();
+            }
+        });
+
+        audio.addEventListener("ended", playNext);
+        nextBtn.addEventListener("click", playNext);
+        prevBtn.addEventListener("click", playPrev);
+
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+            return `${mins}:${secs}`;
+        }
+
+        function startCountdown() {
+            clearInterval(countdownInterval);
+            countdownInterval = setInterval(() => {
+                if (audio.duration) {
+                    const remaining = Math.floor(audio.duration - audio.currentTime);
+                    nowDuration.textContent = formatTime(remaining);
+                    if (remaining <= 0) clearInterval(countdownInterval);
+                }
+            }, 1000);
+        }
+
+        audio.addEventListener("loadedmetadata", () => {
+            if (audio.duration) {
+                nowDuration.textContent = formatTime(audio.duration);
+            }
+        });
+
+        window.addEventListener("DOMContentLoaded", () => {
+            db.ref("icikiwir/songs").once("value", (snapshot) => {
+                const allSongs = [];
+                snapshot.forEach((child) => {
+                    const song = child.val();
+                    if (song.type === "mp3") allSongs.push(song);
+                });
+
+                if (allSongs.length > 0) {
+                    const randomSong = allSongs[Math.floor(Math.random() * allSongs.length)];
+                    audio.src = randomSong.link;
+                    nowTitle.textContent = randomSong.name;
+                    nowArtist.textContent = randomSong.artist;
+                    nowThumb.src = randomSong.thumb;
+                    nowDuration.textContent = randomSong.duration || "00:00";
+                    updateMediaSession(randomSong);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
