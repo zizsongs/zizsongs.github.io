@@ -7,32 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#F0F3F8" />
     <meta name="google-site-verification" content="DLBxg9MH2_pEa7wuMdTIwxzVed32QEzo9NyANSisgAA" />
-
-    <meta name="description" content="ZizSongs adalah situs musik gratis. Dengarkan lagu-lagu pilihan hanya di zizsongs.blogspot.com" />
-    <meta name="keywords" content="zizsong, zizsongs, zizaong, ziz, free music, musik gratis, lagu gratis, download lagu, musik download, free songs, blog musik, ziz songs blogspot com" />
-
+    <meta name="description" content="Dengarkan lagu-lagu pilihan hanya di zizsongs.github.io" />
+    <meta name="keywords" content="zizsong, zizsongs, zizaong, ziz, free music, musik gratis, lagu gratis, download lagu, musik download, free songs, web musik, ziz songs github io" />
     <meta property="og:title" content="ZizSongs | Free Music For You" />
-    <meta property="og:description" content="ZizSongs adalah situs musik gratis. Dengarkan lagu-lagu pilihan hanya di zizsongs.blogspot.com" />
-    <meta property="og:url" content="https://zizsongs.blogspot.com" />
+    <meta property="og:description" content="Dengarkan lagu-lagu pilihan hanya di zizsongs.github.io" />
+    <meta property="og:url" content="https://zizsongs.github.io/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ZizSongs" />
-
     <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/RFKcxf2t/20250701-141247.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="https://i.postimg.cc/bwwHSZ2X/20250701-141240.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="https://i.postimg.cc/PJH1XJkR/20250701-141252.png" />
-
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "ZizSongs",
-            "url": "https://zizsongs.blogspot.com",
-            "description": "ZizSongs adalah situs musik gratis. Dengarkan lagu-lagu pilihan hanya di zizsongs.blogspot.com"
+            "url": "https://zizsongs.github.io/",
+            "description": "Dengarkan lagu-lagu pilihan hanya di zizsongs.github.io"
         }
     </script>
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
     <style>
         * {
             -webkit-tap-highlight-color: rgba(100, 100, 100, 0.1);
@@ -45,24 +39,63 @@
             background: #fff;
         }
 
+        .header {
+            padding: 20px 26px 0px 0px;
+        }
+
         h1 {
             font-size: 33px;
-            margin-left: 30px;
-            margin-top: 35px;
+            margin-left: 29px;
             margin-bottom: 0px;
             font-weight: bold;
         }
 
         h3 {
             font-size: 18px;
-            margin-top: 0px;
-            margin-left: 30px;
+            margin-top: 0;
+            margin-left: 29px;
+            margin-bottom: 0px;
             font-weight: normal;
         }
 
-        /* --- Daftar Lagu --- */
+        .search-container {
+            position: relative;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        #searchInput {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 15px 10px 29px;
+            background-color: #eeeeee;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            border: 1px solid transparent;
+            border-radius: 0 10px 10px 0;
+            -webkit-appearance: none;
+            box-shadow: none;
+        }
+        
+        #searchInput::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+            height: 12px;
+            width: 12px;
+            cursor: pointer;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="black" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>') no-repeat center center;
+        }
+
+
+        #searchInput:hover {
+            box-shadow: none;
+        }
+
+        #searchInput:focus {
+            outline: none;
+        }
+
         .song-list {
-            margin-top: 15px;
+            margin-top: 0px;
             padding-bottom: 30px;
         }
 
@@ -88,13 +121,17 @@
             flex-direction: column;
             justify-content: center;
             flex: 1;
-            padding: 0 0px;
+            padding: 0;
+            overflow: hidden;
         }
 
         .title {
             font-size: 16px;
             font-weight: normal;
             margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .artist {
@@ -106,13 +143,14 @@
 
         .duration {
             font-size: 14px;
+            width: 20px;
             color: #444;
             align-self: center;
             text-align: right;
             padding-left: 10px;
+            margin-left: 0px;
         }
 
-        /* --- Floating Player --- */
         .floating-player {
             position: fixed;
             bottom: 0;
@@ -124,6 +162,11 @@
             backdrop-filter: blur(15px);
             background-color: rgba(255, 255, 255, 0.7);
             border-top: 1px solid #ddd;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .floating-player.hidden {
+            transform: translateY(100%);
         }
 
         .player-info {
@@ -131,6 +174,7 @@
             align-items: center;
             gap: 15px;
             margin-bottom: 30px;
+            padding: 0 30px;
         }
 
         .player-info .thumb {
@@ -139,7 +183,7 @@
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            margin-left: 30px;
+            margin-left: 0;
         }
 
         .details .title {
@@ -168,17 +212,51 @@
             cursor: pointer;
         }
 
-        #shuffleBtn {
+        .top-controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 30px;
+            margin-top: 15px;
+            gap: 0px;
+        }
+
+        .top-controls img {
             width: 27px;
             height: 27px;
             cursor: pointer;
-            margin-right: 27px;
+        }
+
+        #shuffleBtn {
+            cursor: pointer;
+            margin-left: 0px;
+            margin-right: 10px;
+            width: 24px;
+            heught: 24px;
+        }
+
+        #uploadBtn {
+            cursor: pointer;
+            margin-left: 0px;
+            margin-right: 4px;
+            width: 30px;
+            heught: 30px;
+            display: none;
         }
 
         #toggleButton {
             width: 58px;
             height: 58px;
             cursor: pointer;
+        }
+
+        .footer {
+            font-family: 'sans-serif', sans-serif;
+            margin-top: 0px;
+            padding: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #9ca3af;
         }
     </style>
 </head>
@@ -187,16 +265,20 @@
     <header class="header">
         <h1>Songs for you</h1>
         <h3>Listen to your favorite<br />songs here!</h3>
-    </header>
-
-    <main style="margin-bottom: 200px;" class="song-list" id="songList"></main>
-
-    <div class="floating-player">
-        <div style="margin-top: 10px; display: flex; justify-content: flex-end; align-items: center;">
-            <span class="duration" style="margin-right: 10px;" id="nowDuration">00:00</span>
-            <img id="shuffleBtn" class="control-icoon" src="https://i.imghippo.com/files/Ea8501kiA.png" />
+        <div class="search-container" id="searchContainer">
+            <input type="search" id="searchInput" placeholder="Search song" autocomplete="off">
         </div>
-
+    </header>
+    <main style="margin-bottom: 0px;" class="song-list" id="songList"></main>
+    <div class="footer">
+        &copy; 2025 ZizSogs. All rights reserved.
+    </div>
+    <div class="floating-player">
+        <div class="top-controls">
+            <img id="uploadBtn" src="https://i.imghippo.com/files/Mjar6863IWI.png" />
+            <img id="shuffleBtn" title="Acak Lagu" src="https://i.imghippo.com/files/Ea8501kiA.png" />
+            <span class="duration" id="nowDuration">00:00</span>
+        </div>
         <div class="player-info">
             <img id="nowThumb" class="thumb" src="" alt="thumb" />
             <div class="details">
@@ -204,21 +286,17 @@
                 <div id="nowArtist" class="artist">Artis</div>
             </div>
         </div>
-
         <div class="controls">
             <img id="prevBtn" class="control-icon" src="https://i.imghippo.com/files/Wbru9167qLs.png" />
             <img id="toggleButton" class="control-icon" src="https://i.imghippo.com/files/BJO6815Ko.png" />
             <img id="nextBtn" class="control-icon" src="https://i.imghippo.com/files/Gf2373akE.png" />
             <img style="display: none;" id="settingsBtn" class="control-icon" src="https://i.imghippo.com/files/YG4971N.png" />
         </div>
-
         <audio id="audioPlayer" hidden></audio>
     </div>
-
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
     <script>
-        // Firebase init
         const firebaseConfig = {
             apiKey: "AIzaSyByVGU2R4NB6N7FiBy4FocXgxCPygpEX5c",
             authDomain: "catstore-93c1c.firebaseapp.com",
@@ -231,8 +309,6 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-
-        // Get Elements
         const audio = document.getElementById("audioPlayer");
         const nowTitle = document.getElementById("nowTitle");
         const nowArtist = document.getElementById("nowArtist");
@@ -243,18 +319,49 @@
         const nextBtn = document.getElementById("nextBtn");
         const shuffleBtn = document.getElementById("shuffleBtn");
         const songList = document.getElementById("songList");
-        const settingsBtn = document.getElementById("settingsBtn");
-
+        const floatingPlayer = document.querySelector(".floating-player");
+        const searchInput = document.getElementById("searchInput");
         let songs = [];
         let currentIndex = -1;
         let countdownInterval = null;
 
-        // Fetch songs and render list
+        function renderSongList(songsToRender) {
+            songList.innerHTML = "";
+            songsToRender.forEach(data => {
+                const item = document.createElement("div");
+                item.className = "song-item";
+                const thumb = document.createElement("img");
+                thumb.src = data.thumb;
+                thumb.className = "thumb";
+                const info = document.createElement("div");
+                info.className = "info";
+                const title = document.createElement("h2");
+                title.textContent = data.name;
+                title.className = "title";
+                const artist = document.createElement("p");
+                artist.textContent = data.artist;
+                artist.className = "artist";
+                const duration = document.createElement("div");
+                duration.className = "duration";
+                duration.textContent = data.duration;
+                info.appendChild(title);
+                info.appendChild(artist);
+                item.appendChild(thumb);
+                item.appendChild(info);
+                item.appendChild(duration);
+                item.addEventListener("click", () => {
+                    const originalIndex = songs.findIndex(song => song._key === data._key);
+                    if (originalIndex !== -1) {
+                        currentIndex = originalIndex;
+                        playSong();
+                    }
+                });
+                songList.appendChild(item);
+            });
+        }
         db.ref("icikiwir/songs").on("value", (snapshot) => {
             songs = [];
-            songList.innerHTML = "";
             const temp = [];
-
             snapshot.forEach((child) => {
                 const song = child.val();
                 song._key = child.key;
@@ -262,48 +369,17 @@
                     temp.push(song);
                 }
             });
-
             temp.sort((a, b) => b._key.localeCompare(a._key));
             songs = temp;
-
-            songs.forEach((data, i) => {
-                const item = document.createElement("div");
-                item.className = "song-item";
-
-                const thumb = document.createElement("img");
-                thumb.src = data.thumb;
-                thumb.className = "thumb";
-
-                const info = document.createElement("div");
-                info.className = "info";
-
-                const title = document.createElement("h2");
-                title.textContent = data.name;
-                title.className = "title";
-
-                const artist = document.createElement("p");
-                artist.textContent = data.artist;
-                artist.className = "artist";
-
-                const duration = document.createElement("div");
-                duration.className = "duration";
-                duration.textContent = data.duration;
-
-                info.appendChild(title);
-                info.appendChild(artist);
-                item.appendChild(thumb);
-                item.appendChild(info);
-                item.appendChild(duration);
-
-                item.addEventListener("click", () => {
-                    currentIndex = i;
-                    playSong();
-                });
-
-                songList.appendChild(item);
-            });
+            renderSongList(songs);
         });
-
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase().trim();
+            const filteredSongs = songs.filter(song =>
+                song.name.toLowerCase().includes(query)
+            );
+            renderSongList(filteredSongs);
+        });
 
         function playSong() {
             if (currentIndex < 0) return;
@@ -330,30 +406,24 @@
                         type: "image/jpeg"
                     }]
                 });
-
                 navigator.mediaSession.setActionHandler("play", () => {
                     audio.play();
                     playBtn.src = "https://i.imghippo.com/files/wha9389M.png";
                 });
-
                 navigator.mediaSession.setActionHandler("pause", () => {
                     audio.pause();
                     playBtn.src = "https://i.imghippo.com/files/BJO6815Ko.png";
                 });
-
                 navigator.mediaSession.setActionHandler("previoustrack", playPrev);
                 navigator.mediaSession.setActionHandler("nexttrack", playNext);
-
                 navigator.mediaSession.setActionHandler("seekbackward", () => {
                     audio.currentTime -= 10;
                 });
-
                 navigator.mediaSession.setActionHandler("seekforward", () => {
                     audio.currentTime += 10;
                 });
             }
         }
-
         playBtn.addEventListener("click", () => {
             if (audio.paused) {
                 audio.play();
@@ -377,18 +447,15 @@
             currentIndex = (currentIndex - 1 + songs.length) % songs.length;
             playSong();
         }
-
         shuffleBtn.addEventListener("click", () => {
             if (songs.length > 0) {
                 currentIndex = Math.floor(Math.random() * songs.length);
                 playSong();
             }
         });
-
         audio.addEventListener("ended", playNext);
         nextBtn.addEventListener("click", playNext);
         prevBtn.addEventListener("click", playPrev);
-
 
         function formatTime(seconds) {
             const mins = Math.floor(seconds / 60);
@@ -406,21 +473,19 @@
                 }
             }, 1000);
         }
-
         audio.addEventListener("loadedmetadata", () => {
             if (audio.duration) {
                 nowDuration.textContent = formatTime(audio.duration);
             }
         });
-
         window.addEventListener("DOMContentLoaded", () => {
             db.ref("icikiwir/songs").once("value", (snapshot) => {
                 const allSongs = [];
                 snapshot.forEach((child) => {
                     const song = child.val();
+                    song._key = child.key;
                     if (song.type === "mp3") allSongs.push(song);
                 });
-
                 if (allSongs.length > 0) {
                     const randomSong = allSongs[Math.floor(Math.random() * allSongs.length)];
                     audio.src = randomSong.link;
@@ -429,8 +494,18 @@
                     nowThumb.src = randomSong.thumb;
                     nowDuration.textContent = randomSong.duration || "00:00";
                     updateMediaSession(randomSong);
+                    currentIndex = songs.findIndex(song => song._key === randomSong._key);
                 }
             });
+        });
+        let lastScrollY = window.scrollY;
+        window.addEventListener("scroll", () => {
+            if (lastScrollY < window.scrollY && window.scrollY > 50) {
+                floatingPlayer.classList.add("hidden");
+            } else {
+                floatingPlayer.classList.remove("hidden");
+            }
+            lastScrollY = window.scrollY;
         });
     </script>
 </body>
