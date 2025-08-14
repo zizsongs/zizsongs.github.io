@@ -1,43 +1,69 @@
 <!DOCTYPE html>
 <html lang="in">
+
 <head>
     <meta charset="UTF-8" />
     <title>ZizSongs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#F0F3F8" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
-    <style>
+    <meta name="google-site-verification" content="DLBxg9MH2_pEa7wuMdTIwxzVed32QEzo9NyANSisgAA" />
+    <meta name="description" content="Dengarkan lagu-lagu pilihan hanya di zizsongs.github.io" />
+    <meta name="keywords" content="zizsong, zizsongs, zizaong, ziz, free music, musik gratis, lagu gratis, download lagu, musik download, free songs, web musik, ziz songs github io" />
+    <meta property="og:title" content="ZizSongs | Free Music For You" />
+    <meta property="og:description" content="Dengarkan lagu-lagu pilihan hanya di zizsongs.github.io" />
+    <meta property="og:url" content="https://zizsongs.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ZizSongs" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/RFKcxf2t/20250701-141247.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.postimg.cc/bwwHSZ2X/20250701-141240.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.postimg.cc/PJH1XJkR/20250701-141252.png" />
+    <script type="application/ld+json">
         {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "ZizSongs",
+            "url": "https://zizsongs.github.io/",
+            "description": "Dengarkan lagu-lagu pilihan hanya di zizsongs.github.io"
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+        * {
             -webkit-tap-highlight-color: rgba(100, 100, 100, 0.1);
         }
+
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             background: #fff;
         }
-        .dialog-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+
         .header {
-            padding: 20px 26px 0 0;
+            padding: 20px 26px 0px 0px;
         }
+
         h1 {
             font-size: 33px;
-            margin: 0 0 0 29px;
+            margin-left: 29px;
+            margin-bottom: 0px;
             font-weight: bold;
         }
+
         h3 {
             font-size: 18px;
-            margin: 0 0 0 29px;
+            margin-top: 0;
+            margin-left: 29px;
+            margin-bottom: 0px;
             font-weight: normal;
         }
+
         .search-container {
             position: relative;
-            margin: 30px 0 20px;
+            margin-top: 30px;
+            margin-bottom: 20px;
         }
+
         #searchInput {
             width: 100%;
             box-sizing: border-box;
@@ -50,13 +76,29 @@
             -webkit-appearance: none;
             box-shadow: none;
         }
+        
+        #searchInput::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+            height: 12px;
+            width: 12px;
+            cursor: pointer;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="black" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>') no-repeat center center;
+        }
+
+
+        #searchInput:hover {
+            box-shadow: none;
+        }
+
         #searchInput:focus {
             outline: none;
         }
+
         .song-list {
-            margin-top: 0;
+            margin-top: 0px;
             padding-bottom: 30px;
         }
+
         .song-item {
             display: flex;
             align-items: center;
@@ -65,6 +107,7 @@
             padding: 12px 30px;
             cursor: pointer;
         }
+
         .thumb {
             width: 60px;
             height: 60px;
@@ -72,13 +115,16 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
+
         .info {
             display: flex;
             flex-direction: column;
             justify-content: center;
             flex: 1;
+            padding: 0;
             overflow: hidden;
         }
+
         .title {
             font-size: 16px;
             font-weight: normal;
@@ -87,21 +133,24 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         .artist {
             font-size: 14px;
             color: #555;
-            margin-top: 0;
+            margin-top: 0px;
             font-weight: normal;
         }
+
         .duration {
             font-size: 14px;
             width: 20px;
             color: #444;
+            align-self: center;
             text-align: right;
             padding-left: 10px;
+            margin-left: 0px;
         }
 
-        /* --- Floating Player --- */
         .floating-player {
             position: fixed;
             bottom: 0;
@@ -115,9 +164,11 @@
             border-top: 1px solid #ddd;
             transition: transform 0.4s ease-in-out;
         }
+
         .floating-player.hidden {
             transform: translateY(100%);
         }
+
         .player-info {
             display: flex;
             align-items: center;
@@ -125,23 +176,28 @@
             margin-bottom: 30px;
             padding: 0 30px;
         }
+
         .player-info .thumb {
             width: 60px;
             height: 60px;
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-left: 0;
         }
+
         .details .title {
             font-size: 16px;
             font-weight: 600;
         }
+
         .details .artist {
             font-size: 14px;
             color: #555;
-            margin-top: 0;
+            margin-top: 0px;
             font-weight: normal;
         }
+
         .controls {
             display: flex;
             justify-content: space-around;
@@ -149,250 +205,62 @@
             margin-bottom: 25px;
             padding: 0 50px;
         }
+
         .control-icon {
             width: 43px;
             height: 43px;
             cursor: pointer;
         }
+
         .top-controls {
             display: flex;
             justify-content: flex-end;
             align-items: center;
             padding: 0 30px;
             margin-top: 15px;
+            gap: 0px;
         }
+
         .top-controls img {
             width: 27px;
             height: 27px;
             cursor: pointer;
         }
+
         #shuffleBtn {
             cursor: pointer;
+            margin-left: 0px;
             margin-right: 10px;
             width: 24px;
-            height: 24px;
+            heught: 24px;
         }
+
         #uploadBtn {
             cursor: pointer;
+            margin-left: 0px;
             margin-right: 4px;
             width: 30px;
-            height: 30px;
+            heught: 30px;
             display: none;
         }
+
         #toggleButton {
             width: 58px;
             height: 58px;
             cursor: pointer;
         }
+
         .footer {
-            font-family: sans-serif;
+            font-family: 'sans-serif', sans-serif;
+            margin-top: 0px;
             padding: 40px;
             text-align: center;
             font-size: 14px;
             color: #9ca3af;
         }
-
-        /* --- CSS Dialog Upload --- */
-        :root {
-            --primary-color: #007BFF;
-            --primary-hover-color: #0056b3;
-            --light-gray: #f4f7f6;
-            --text-dark: #333;
-            --text-light: #666;
-            --border-color: #ddd;
-            --animation-duration: 0.2s;
-            --animation-timing: ease-out;
-        }
-        @keyframes dialogIn {
-            from { opacity: 0; transform: translateY(40px) scale(0.96); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes dialogOut {
-            from { opacity: 1; transform: translateY(0) scale(1); }
-            to { opacity: 0; transform: translateY(40px) scale(0.96); }
-        }
-        dialog {
-            width: calc(100% - 30px);
-            max-width: 470px;
-            padding: 0;
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            position: relative;
-            backdrop-filter: blur(15px);
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-        dialog[open] {
-            animation: dialogIn 0.35s cubic-bezier(.68,-0.55,.27,1.55);
-        }
-        dialog.closing {
-            animation: dialogOut 0.32s cubic-bezier(.68,-0.55,.27,1.55) forwards;
-        }
-        dialog::backdrop {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(3px);
-            animation: fadeInBackdrop 0.35s ease;
-        }
-        dialog.closing::backdrop {
-            animation: fadeOutBackdrop 0.32s ease forwards;
-        }
-        @keyframes fadeInBackdrop {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes fadeOutBackdrop {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-
-        .dialog-container {
-            padding: 30px;
-        }
-        #zizCloseDialogBtn {
-            outline: none;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #f1f1f1;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #888;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            z-index: 10;
-        }
-        #zizCloseDialogBtn:hover {
-            background: #e0e0e0;
-            color: #333;
-            transform: rotate(90deg);
-        }
-        .dialog-container h1 {
-            font-size: 28px;
-            color: var(--text-dark);
-            margin: 0 0 5px;
-            font-weight: 700;
-        }
-        .dialog-container p {
-            color: var(--text-light);
-            margin: 0;
-            font-size: 16px;
-        }
-        .form-group {
-            margin-bottom: 18px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #555;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 15px;
-            box-sizing: border-box;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        input[type="text"]:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
-        }
-        .file-details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 25px 0 30px;
-        }
-        .detail-item {
-            background-color: #f9fafb;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .detail-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-        .detail-item span:first-child {
-            display: block;
-            font-size: 13px;
-            color: var(--text-light);
-            margin-bottom: 4px;
-        }
-        .detail-item span:last-child {
-            font-weight: 600;
-            color: var(--text-dark);
-            font-size: 15px;
-        }
-        .btn-group {
-            display: flex;
-            gap: 15px;
-        }
-        .btn {
-            flex: 1;
-            padding: 14px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn:active {
-            transform: scale(0.98);
-        }
-        #zizSelectFileBtn {
-            background-color: #e9ecef;
-            color: #495057;
-            border: 1px solid #ced4da;
-        }
-        #zizSelectFileBtn:hover {
-            background-color: #d8dde1;
-        }
-        #zizUploadBtn {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        #zizUploadBtn:hover {
-            background-color: var(--primary-hover-color);
-        }
-        #zizUploadBtn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: var(--upload-progress, 0%);
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.2);
-            transition: width 0.3s ease;
-        }
-        #zizUploadBtn .btn-text {
-            position: relative;
-            z-index: 2;
-        }
-        .btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.9;
-        }
-        input[type="file"] {
-            display: none;
-        }
     </style>
 </head>
+
 <body>
     <header class="header">
         <h1>Songs for you</h1>
@@ -401,20 +269,16 @@
             <input type="search" id="searchInput" placeholder="Search song" autocomplete="off">
         </div>
     </header>
-
     <main style="margin-bottom: 0px;" class="song-list" id="songList"></main>
-
     <div class="footer">
         &copy; 2025 ZizSogs. All rights reserved.
     </div>
-
     <div class="floating-player">
         <div class="top-controls">
             <img id="uploadBtn" src="https://i.imghippo.com/files/Mjar6863IWI.png" />
             <img id="shuffleBtn" title="Acak Lagu" src="https://i.imghippo.com/files/Ea8501kiA.png" />
             <span class="duration" id="nowDuration">00:00</span>
         </div>
-
         <div class="player-info">
             <img id="nowThumb" class="thumb" src="" alt="thumb" />
             <div class="details">
@@ -422,83 +286,17 @@
                 <div id="nowArtist" class="artist">Artis</div>
             </div>
         </div>
-
         <div class="controls">
             <img id="prevBtn" class="control-icon" src="https://i.imghippo.com/files/Wbru9167qLs.png" />
             <img id="toggleButton" class="control-icon" src="https://i.imghippo.com/files/BJO6815Ko.png" />
             <img id="nextBtn" class="control-icon" src="https://i.imghippo.com/files/Gf2373akE.png" />
             <img style="display: none;" id="settingsBtn" class="control-icon" src="https://i.imghippo.com/files/YG4971N.png" />
         </div>
-
         <audio id="audioPlayer" hidden></audio>
     </div>
-
-    <!-- DIALOG UPLOAD LAGU, muncul kalau search "2580" -->
-    <dialog id="zizUploadDialog">
-        <div class="dialog-container">
-            <button id="zizCloseDialogBtn" aria-label="Close">×</button>
-
-            <!-- Dialog Upload -->
-            <div class="dialog-header">
-                <h1>Upload New Song</h1>
-                <p>Add your favorite song here</p>
-            </div>
-
-            <div class="form-group">
-                <label for="zizFileName">Song Name</label>
-                <input type="text" id="zizFileName" placeholder="e.g., Yesterday" />
-            </div>
-
-            <div class="form-group">
-                <label for="zizArtist">Artist Name</label>
-                <input type="text" id="zizArtist" placeholder="e.g., The Beatles" />
-            </div>
-
-            <div class="form-group">
-                <label for="zizThumb">Thumbnail URL</label>
-                <input type="text" id="zizThumb" placeholder="https://example.com/image.jpg" />
-            </div>
-
-            <div class="file-details-grid">
-                <div class="detail-item">
-                    <span>Duration</span>
-                    <span id="zizFileDuration">-</span>
-                </div>
-                <div class="detail-item">
-                    <span>Size</span>
-                    <span id="zizFileSize">-</span>
-                </div>
-                <div class="detail-item">
-                    <span>Upload Date</span>
-                    <span id="zizFileDate">-</span>
-                </div>
-                <div class="detail-item">
-                    <span>Type</span>
-                    <span id="zizFileType">-</span>
-                </div>
-            </div>
-
-            <input type="file" id="zizFileInput" accept="audio/*" />
-
-            <div class="btn-group">
-                <button class="btn" id="zizSelectFileBtn">
-                    <span class="btn-text">Select File</span>
-                </button>
-                <button class="btn" id="zizUploadBtn">
-                    <span class="btn-text">Upload File</span>
-                </button>
-            </div>
-
-            <audio id="zizAudio" hidden></audio>
-        </div>
-    </dialog>
-
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-storage.js"></script>
-
     <script>
-        // --- Firebase Config & Inisialisasi ---
         const firebaseConfig = {
             apiKey: "AIzaSyByVGU2R4NB6N7FiBy4FocXgxCPygpEX5c",
             authDomain: "catstore-93c1c.firebaseapp.com",
@@ -509,12 +307,8 @@
             appId: "1:1023436390032:web:d1f7fc95063228d3232215",
             measurementId: "G-SR3T84KBXC"
         };
-
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-        const storage = firebase.storage();
-
-        // --- Main player & songs logic ---
         const audio = document.getElementById("audioPlayer");
         const nowTitle = document.getElementById("nowTitle");
         const nowArtist = document.getElementById("nowArtist");
@@ -527,7 +321,6 @@
         const songList = document.getElementById("songList");
         const floatingPlayer = document.querySelector(".floating-player");
         const searchInput = document.getElementById("searchInput");
-
         let songs = [];
         let currentIndex = -1;
         let countdownInterval = null;
@@ -537,33 +330,25 @@
             songsToRender.forEach(data => {
                 const item = document.createElement("div");
                 item.className = "song-item";
-
                 const thumb = document.createElement("img");
                 thumb.src = data.thumb;
                 thumb.className = "thumb";
-
                 const info = document.createElement("div");
                 info.className = "info";
-
                 const title = document.createElement("h2");
                 title.textContent = data.name;
                 title.className = "title";
-
                 const artist = document.createElement("p");
                 artist.textContent = data.artist;
                 artist.className = "artist";
-
                 const duration = document.createElement("div");
                 duration.className = "duration";
                 duration.textContent = data.duration;
-
                 info.appendChild(title);
                 info.appendChild(artist);
-
                 item.appendChild(thumb);
                 item.appendChild(info);
                 item.appendChild(duration);
-
                 item.addEventListener("click", () => {
                     const originalIndex = songs.findIndex(song => song._key === data._key);
                     if (originalIndex !== -1) {
@@ -571,15 +356,12 @@
                         playSong();
                     }
                 });
-
                 songList.appendChild(item);
             });
         }
-
         db.ref("icikiwir/songs").on("value", (snapshot) => {
             songs = [];
             const temp = [];
-
             snapshot.forEach((child) => {
                 const song = child.val();
                 song._key = child.key;
@@ -587,358 +369,145 @@
                     temp.push(song);
                 }
             });
-
             temp.sort((a, b) => b._key.localeCompare(a._key));
             songs = temp;
             renderSongList(songs);
         });
-        
-    // --- Fungsi search, kalau "2580" munculkan dialog upload ---
-    const zizUploadDialog = document.getElementById('zizUploadDialog');
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase().trim();
+            const filteredSongs = songs.filter(song =>
+                song.name.toLowerCase().includes(query)
+            );
+            renderSongList(filteredSongs);
+        });
 
-    searchInput.addEventListener("input", () => {
-        const query = searchInput.value.toLowerCase().trim();
-
-        // Kalau user ketik "2580", munculkan dialog
-        if (query === "2580") {
-            zizUploadDialog.showModal();
-            // searchInput.value = ""; // boleh direset kalau mau
+        function playSong() {
+            if (currentIndex < 0) return;
+            const song = songs[currentIndex];
+            audio.src = song.link;
+            audio.play();
+            nowTitle.textContent = song.name;
+            nowArtist.textContent = song.artist;
+            nowThumb.src = song.thumb;
+            playBtn.src = "https://i.imghippo.com/files/wha9389M.png";
+            updateMediaSession(song);
+            startCountdown();
         }
 
-        const filteredSongs = songs.filter(song =>
-            song.name.toLowerCase().includes(query)
-        );
-        renderSongList(filteredSongs);
-    });
-
-    function playSong() {
-        if (currentIndex < 0) return;
-        const song = songs[currentIndex];
-        audio.src = song.link;
-        audio.play();
-        nowTitle.textContent = song.name;
-        nowArtist.textContent = song.artist;
-        nowThumb.src = song.thumb;
-        playBtn.src = "https://i.imghippo.com/files/wha9389M.png";
-        updateMediaSession(song);
-        startCountdown();
-    }
-
-    function updateMediaSession(song) {
-        if ('mediaSession' in navigator) {
-            navigator.mediaSession.metadata = new MediaMetadata({
-                title: song.name,
-                artist: song.artist,
-                album: "ZizSongs",
-                artwork: [{
-                    src: song.thumb,
-                    sizes: "512x512",
-                    type: "image/jpeg"
-                }]
-            });
-
-            navigator.mediaSession.setActionHandler("play", () => {
+        function updateMediaSession(song) {
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: song.name,
+                    artist: song.artist,
+                    album: "ZizSongs",
+                    artwork: [{
+                        src: song.thumb,
+                        sizes: "512x512",
+                        type: "image/jpeg"
+                    }]
+                });
+                navigator.mediaSession.setActionHandler("play", () => {
+                    audio.play();
+                    playBtn.src = "https://i.imghippo.com/files/wha9389M.png";
+                });
+                navigator.mediaSession.setActionHandler("pause", () => {
+                    audio.pause();
+                    playBtn.src = "https://i.imghippo.com/files/BJO6815Ko.png";
+                });
+                navigator.mediaSession.setActionHandler("previoustrack", playPrev);
+                navigator.mediaSession.setActionHandler("nexttrack", playNext);
+                navigator.mediaSession.setActionHandler("seekbackward", () => {
+                    audio.currentTime -= 10;
+                });
+                navigator.mediaSession.setActionHandler("seekforward", () => {
+                    audio.currentTime += 10;
+                });
+            }
+        }
+        playBtn.addEventListener("click", () => {
+            if (audio.paused) {
                 audio.play();
                 playBtn.src = "https://i.imghippo.com/files/wha9389M.png";
-            });
-
-            navigator.mediaSession.setActionHandler("pause", () => {
+                startCountdown();
+            } else {
                 audio.pause();
                 playBtn.src = "https://i.imghippo.com/files/BJO6815Ko.png";
-            });
+                clearInterval(countdownInterval);
+            }
+        });
 
-            navigator.mediaSession.setActionHandler("previoustrack", playPrev);
-            navigator.mediaSession.setActionHandler("nexttrack", playNext);
-
-            navigator.mediaSession.setActionHandler("seekbackward", () => {
-                audio.currentTime -= 10;
-            });
-
-            navigator.mediaSession.setActionHandler("seekforward", () => {
-                audio.currentTime += 10;
-            });
-        }
-    }
-
-    playBtn.addEventListener("click", () => {
-        if (audio.paused) {
-            audio.play();
-            playBtn.src = "https://i.imghippo.com/files/wha9389M.png";
-            startCountdown();
-        } else {
-            audio.pause();
-            playBtn.src = "https://i.imghippo.com/files/BJO6815Ko.png";
-            clearInterval(countdownInterval);
-        }
-    });
-
-    function playNext() {
-        if (songs.length === 0) return;
-        currentIndex = (currentIndex + 1) % songs.length;
-        playSong();
-    }
-
-    function playPrev() {
-        if (songs.length === 0) return;
-        currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-        playSong();
-    }
-
-    shuffleBtn.addEventListener("click", () => {
-        if (songs.length > 0) {
-            currentIndex = Math.floor(Math.random() * songs.length);
+        function playNext() {
+            if (songs.length === 0) return;
+            currentIndex = (currentIndex + 1) % songs.length;
             playSong();
         }
-    });
 
-    audio.addEventListener("ended", playNext);
-    nextBtn.addEventListener("click", playNext);
-    prevBtn.addEventListener("click", playPrev);
+        function playPrev() {
+            if (songs.length === 0) return;
+            currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+            playSong();
+        }
+        shuffleBtn.addEventListener("click", () => {
+            if (songs.length > 0) {
+                currentIndex = Math.floor(Math.random() * songs.length);
+                playSong();
+            }
+        });
+        audio.addEventListener("ended", playNext);
+        nextBtn.addEventListener("click", playNext);
+        prevBtn.addEventListener("click", playPrev);
 
-    function formatTime(seconds) {
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
-        return `${mins}:${secs}`;
-    }
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+            return `${mins}:${secs}`;
+        }
 
-    function startCountdown() {
-        clearInterval(countdownInterval);
-        countdownInterval = setInterval(() => {
+        function startCountdown() {
+            clearInterval(countdownInterval);
+            countdownInterval = setInterval(() => {
+                if (audio.duration) {
+                    const remaining = Math.floor(audio.duration - audio.currentTime);
+                    nowDuration.textContent = formatTime(remaining);
+                    if (remaining <= 0) clearInterval(countdownInterval);
+                }
+            }, 1000);
+        }
+        audio.addEventListener("loadedmetadata", () => {
             if (audio.duration) {
-                const remaining = Math.floor(audio.duration - audio.currentTime);
-                nowDuration.textContent = formatTime(remaining);
-                if (remaining <= 0) clearInterval(countdownInterval);
-            }
-        }, 1000);
-    }
-
-    audio.addEventListener("loadedmetadata", () => {
-        if (audio.duration) {
-            nowDuration.textContent = formatTime(audio.duration);
-        }
-    });
-
-    window.addEventListener("DOMContentLoaded", () => {
-        db.ref("icikiwir/songs").once("value", (snapshot) => {
-            const allSongs = [];
-            snapshot.forEach((child) => {
-                const song = child.val();
-                song._key = child.key;
-                if (song.type === "mp3") allSongs.push(song);
-            });
-
-            if (allSongs.length > 0) {
-                const randomSong = allSongs[Math.floor(Math.random() * allSongs.length)];
-                audio.src = randomSong.link;
-                nowTitle.textContent = randomSong.name;
-                nowArtist.textContent = randomSong.artist;
-                nowThumb.src = randomSong.thumb;
-                nowDuration.textContent = randomSong.duration || "00:00";
-                updateMediaSession(randomSong);
-                currentIndex = songs.findIndex(song => song._key === randomSong._key);
+                nowDuration.textContent = formatTime(audio.duration);
             }
         });
-    });
-
-    let lastScrollY = window.scrollY;
-    window.addEventListener("scroll", () => {
-        if (lastScrollY < window.scrollY && window.scrollY > 50) {
-            floatingPlayer.classList.add("hidden");
-        } else {
-            floatingPlayer.classList.remove("hidden");
-        }
-        lastScrollY = window.scrollY;
-    });
-
-    // --- Dialog Upload Lagu ---
-    const zizCloseDialogBtn = document.getElementById('zizCloseDialogBtn');
-
-    function closeDialog() {
-        zizUploadDialog.classList.add('closing');
-        zizUploadDialog.addEventListener('animationend', () => {
-            zizUploadDialog.classList.remove('closing');
-            zizUploadDialog.close();
-        }, { once: true });
-    }
-
-    zizCloseDialogBtn.addEventListener('click', closeDialog);
-    zizUploadDialog.addEventListener('click', (event) => {
-        if (event.target === zizUploadDialog) {
-            closeDialog();
-        }
-    });
-
-    // --- Fungsi Upload Lagu ---
-    const zizFileInput = document.getElementById("zizFileInput");
-    const zizSelectFileBtn = document.getElementById("zizSelectFileBtn").querySelector('.btn-text');
-    const zizUploadBtn = document.getElementById("zizUploadBtn");
-    const zizUploadBtnText = zizUploadBtn.querySelector('.btn-text');
-    const zizAudio = document.getElementById("zizAudio");
-    const zizFileName = document.getElementById("zizFileName");
-    const zizFileDuration = document.getElementById("zizFileDuration");
-    const zizArtist = document.getElementById("zizArtist");
-    const zizThumb = document.getElementById("zizThumb");
-    const zizFileSize = document.getElementById("zizFileSize");
-    const zizFileDate = document.getElementById("zizFileDate");
-    const zizFileType = document.getElementById("zizFileType");
-
-    function formatBytes(bytes) {
-        if (bytes === 0) return '0 Bytes';
-        const s = ["Bytes", "KB", "MB", "GB"];
-        const i = Math.floor(Math.log(bytes) / Math.log(1024));
-        return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + " " + s[i];
-    }
-
-    function formatDuration(seconds) {
-        const m = Math.floor(seconds / 60);
-        const s = Math.floor(seconds % 60).toString().padStart(2, "0");
-        return `${m}:${s}`;
-    }
-
-    function capitalizeFirst(str) {
-        if (!str) return "";
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-
-    document.getElementById("zizSelectFileBtn").addEventListener("click", () => {
-        zizFileInput.click();
-    });
-
-    zizFileInput.addEventListener("change", () => {
-        if (zizFileInput.files.length === 0) return;
-
-        const file = zizFileInput.files[0];
-        const ext = file.name.split(".").pop().toLowerCase();
-
-        if (ext !== "mp3") {
-            alert("Mohon pilih file music dengan format MP3.");
-            zizFileInput.value = "";
-            return;
-        }
-
-        const nameOnly = file.name.replace(/\.[^/.]+$/, "").trim();
-        const now = new Date();
-        const fDate = now.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" });
-
-        const delims = [" - ", " – ", " ~ ", " | ", ": "];
-        let splitDone = false;
-
-        for (let d of delims) {
-            if (nameOnly.includes(d)) {
-                const [aName, sName] = nameOnly.split(d);
-                zizArtist.value = capitalizeFirst(aName.trim());
-                zizFileName.value = capitalizeFirst(sName.trim());
-                splitDone = true;
-                break;
-            }
-        }
-
-        if (!splitDone) {
-            zizArtist.value = "";
-            zizFileName.value = capitalizeFirst(nameOnly);
-        }
-
-        zizFileType.textContent = ext;
-        zizFileSize.textContent = formatBytes(file.size);
-        zizFileDate.textContent = fDate;
-
-        const fileURL = URL.createObjectURL(file);
-        zizAudio.src = fileURL;
-        zizAudio.onloadedmetadata = () => {
-            zizFileDuration.textContent = formatDuration(zizAudio.duration);
-        };
-
-        zizSelectFileBtn.textContent = "Change File";
-    });
-
-    zizUploadBtn.addEventListener("click", () => {
-        if (zizFileInput.files.length === 0) {
-            alert("Mohon pilih file music terlebih dahulu.");
-            return;
-        }
-
-        const file = zizFileInput.files[0];
-        const name = zizFileName.value.trim();
-        const artistName = zizArtist.value.trim();
-        const thumbnail = zizThumb.value.trim();
-
-        if (!name || !artistName || !thumbnail) {
-            alert("Semua kolom (Song Name, Artist, Thumbnail) harus diisi.");
-            return;
-        }
-
-        try {
-            new URL(thumbnail);
-        } catch (_) {
-            alert("Link thumbnail harus berupa URL yang valid.");
-            return;
-        }
-
-        const date = zizFileDate.textContent;
-        const duration = zizFileDuration.textContent;
-        const size = zizFileSize.textContent;
-        const type = zizFileType.textContent;
-
-        const storageRef = storage.ref(`icikiwir/files/${Date.now()}_${file.name}`);
-        const uploadTask = storageRef.put(file);
-
-        zizUploadBtn.disabled = true;
-        document.getElementById("zizSelectFileBtn").disabled = true;
-
-        uploadTask.on("state_changed", (snapshot) => {
-            const progress = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-            zizUploadBtn.style.setProperty('--upload-progress', `${progress}%`);
-            zizUploadBtnText.textContent = `Uploading: ${progress}%`;
-        }, (error) => {
-            alert("Gagal upload: " + error.message);
-            zizUploadBtnText.textContent = "Upload File";
-            zizUploadBtn.style.setProperty('--upload-progress', `0%`);
-            zizUploadBtn.disabled = false;
-            document.getElementById("zizSelectFileBtn").disabled = false;
-        }, () => {
-            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                const newRef = db.ref("icikiwir/songs").push();
-                const key = newRef.key;
-
-                const data = {
-                    name,
-                    artist: artistName,
-                    date,
-                    duration,
-                    size,
-                    type,
-                    thumb: thumbnail,
-                    link: downloadURL,
-                    id: key
-                };
-
-                newRef.set(data, (err) => {
-                    if (err) {
-                        alert("Gagal menyimpan data ke database.");
-                    } else {
-                        alert("Berhasil diupload!");
-                        closeDialog();
-
-                        // Reset Form
-                        document.getElementById("zizFileInput").value = "";
-                        zizFileName.value = "";
-                        zizArtist.value = "";
-                        zizThumb.value = "";
-                        zizFileDuration.textContent = "-";
-                        zizFileSize.textContent = "-";
-                        zizFileDate.textContent = "-";
-                        zizFileType.textContent = "-";
-                        zizSelectFileBtn.textContent = "Select File";
-                    }
-
-                    zizUploadBtnText.textContent = "Upload File";
-                    zizUploadBtn.style.setProperty('--upload-progress', `0%`);
-                    zizUploadBtn.disabled = false;
-                    document.getElementById("zizSelectFileBtn").disabled = false;
+        window.addEventListener("DOMContentLoaded", () => {
+            db.ref("icikiwir/songs").once("value", (snapshot) => {
+                const allSongs = [];
+                snapshot.forEach((child) => {
+                    const song = child.val();
+                    song._key = child.key;
+                    if (song.type === "mp3") allSongs.push(song);
                 });
+                if (allSongs.length > 0) {
+                    const randomSong = allSongs[Math.floor(Math.random() * allSongs.length)];
+                    audio.src = randomSong.link;
+                    nowTitle.textContent = randomSong.name;
+                    nowArtist.textContent = randomSong.artist;
+                    nowThumb.src = randomSong.thumb;
+                    nowDuration.textContent = randomSong.duration || "00:00";
+                    updateMediaSession(randomSong);
+                    currentIndex = songs.findIndex(song => song._key === randomSong._key);
+                }
             });
         });
-    });
-</script>
+        let lastScrollY = window.scrollY;
+        window.addEventListener("scroll", () => {
+            if (lastScrollY < window.scrollY && window.scrollY > 50) {
+                floatingPlayer.classList.add("hidden");
+            } else {
+                floatingPlayer.classList.remove("hidden");
+            }
+            lastScrollY = window.scrollY;
+        });
+    </script>
 </body>
+
 </html>
